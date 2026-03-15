@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>Auto Rotator</title>
+
 <script>
 let links = [
  "https://omg10.com/4/10735844",
@@ -10,19 +13,35 @@ let links = [
 let index = 0;
 
 function rotate() {
-    window.location.href = links[index];
+    document.getElementById("frame").src = links[index];
     index = (index + 1) % links.length;
-
-    setTimeout(rotate, 6000); // 6 seconds
 }
 
-setTimeout(rotate, 6000);
+window.onload = function () {
+    rotate(); // open immediately
+    setInterval(rotate, 6000); // change every 6 seconds
+};
 </script>
+
+<style>
+html,body{
+margin:0;
+padding:0;
+height:100%;
+overflow:hidden;
+}
+iframe{
+width:100%;
+height:100%;
+border:none;
+}
+</style>
+
 </head>
+
 <body>
 
-<h2>Please wait...</h2>
-<p>Redirecting...</p>
+<iframe id="frame"></iframe>
 
 </body>
 </html>
