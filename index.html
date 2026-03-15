@@ -2,61 +2,97 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Auto Link Rotator</title>
+<title>Smart Link Rotator</title>
 
 <script>
+
 let links = [
 "https://omg10.com/4/10735844",
-"https://link.gigapub.tech/l/5wuv50bo3",
+"https://link.gigapub.tech/l/5wuv50bo3"
 ];
 
-let delay = 6000; // 6 seconds
 let index = 0;
 
-function openLinksLoop() {
+function startFirstLink(){
+    window.open(links[index], "_blank");
+    index = (index + 1) % links.length;
 
-    setInterval(() => {
-
-        window.open(links[index], "_blank");
-
-        index++;
-        if(index >= links.length){
-            index = 0;
-        }
-
-    }, delay);
-
+    setTimeout(showPopup,3000);
 }
+
+function showPopup(){
+    document.getElementById("popup").style.display="flex";
+}
+
+function openNext(){
+    window.open(links[index], "_blank");
+    index = (index + 1) % links.length;
+
+    document.getElementById("popup").style.display="none";
+
+    setTimeout(showPopup,3000);
+}
+
 </script>
 
 <style>
+
 body{
-font-family: Arial;
+font-family:Arial;
 text-align:center;
-padding-top:100px;
 background:#111;
 color:white;
+padding-top:100px;
+}
+
+#popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+.popup-box{
+background:white;
+color:black;
+padding:40px;
+border-radius:10px;
+text-align:center;
 }
 
 button{
-padding:15px 40px;
-font-size:20px;
+padding:15px 35px;
+font-size:18px;
 border:none;
-border-radius:10px;
-cursor:pointer;
 background:#00c853;
 color:white;
+border-radius:8px;
+cursor:pointer;
 }
+
 </style>
 
 </head>
 
-<body>
+<body onload="startFirstLink()">
 
-<h2>Start Auto Link Rotator</h2>
-<p>Click once to start automatic opening</p>
+<h2>Loading...</h2>
 
-<button onclick="openLinksLoop()">START</button>
+<div id="popup">
+<div class="popup-box">
+
+<h3>Click to Continue</h3>
+<p>Press the button to proceed</p>
+
+<button onclick="openNext()">CLICK</button>
+
+</div>
+</div>
 
 </body>
 </html>
