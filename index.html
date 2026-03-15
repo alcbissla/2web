@@ -2,38 +2,50 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Auto Rotator</title>
+<title>Auto Link Rotator</title>
 
 <script>
 let links = [
- "https://omg10.com/4/10735844",
- "https://link.gigapub.tech/l/5wuv50bo3"
+"https://omg10.com/4/10735844",
+"https://link.gigapub.tech/l/5wuv50bo3",
 ];
 
+let delay = 6000; // 6 seconds
 let index = 0;
 
-function rotate() {
-    document.getElementById("frame").src = links[index];
-    index = (index + 1) % links.length;
-}
+function openLinksLoop() {
 
-window.onload = function () {
-    rotate(); // open immediately
-    setInterval(rotate, 6000); // change every 6 seconds
-};
+    setInterval(() => {
+
+        window.open(links[index], "_blank");
+
+        index++;
+        if(index >= links.length){
+            index = 0;
+        }
+
+    }, delay);
+
+}
 </script>
 
 <style>
-html,body{
-margin:0;
-padding:0;
-height:100%;
-overflow:hidden;
+body{
+font-family: Arial;
+text-align:center;
+padding-top:100px;
+background:#111;
+color:white;
 }
-iframe{
-width:100%;
-height:100%;
+
+button{
+padding:15px 40px;
+font-size:20px;
 border:none;
+border-radius:10px;
+cursor:pointer;
+background:#00c853;
+color:white;
 }
 </style>
 
@@ -41,7 +53,10 @@ border:none;
 
 <body>
 
-<iframe id="frame"></iframe>
+<h2>Start Auto Link Rotator</h2>
+<p>Click once to start automatic opening</p>
+
+<button onclick="openLinksLoop()">START</button>
 
 </body>
 </html>
